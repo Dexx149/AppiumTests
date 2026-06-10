@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+}
+
+group = 'ru.netology'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.10.1'
+    seleniumVersion = '4.10.0'
+    appiumVersion = '8.6.0'
+    allureVersion = '2.25.0'
+}
+
+dependencies {
+    // Selenium
+    implementation "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
+    implementation "org.seleniumhq.selenium:selenium-api:${seleniumVersion}"
+
+    // Appium Java Client
+    implementation "io.appium:java-client:${appiumVersion}"
+
+    // JUnit 5
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:${junitVersion}"
+
+    // Allure
+    implementation "io.qameta.allure:allure-junit5:${allureVersion}"
+    implementation "io.qameta.allure:allure-rest-assured:${allureVersion}"
+
+    // Логирование
+    implementation "org.slf4j:slf4j-simple:2.0.9"
+}
+
+test {
+    useJUnitPlatform()
+}

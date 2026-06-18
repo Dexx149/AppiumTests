@@ -12,8 +12,11 @@ repositories {
 ext {
     junitVersion = '5.10.1'
     seleniumVersion = '4.10.0'
-    appiumVersion = '8.6.0'
+    appiumVersion = '9.2.3'
     allureVersion = '2.25.0'
+    restAssuredVersion = '5.4.0'
+    dataFakerVeersion = '2.2.2'
+    assertjVersion = '3.25.3'
 }
 
 dependencies {
@@ -35,6 +38,19 @@ dependencies {
 
     // Логирование
     implementation "org.slf4j:slf4j-simple:2.0.9"
+
+    // AssertJ
+    testImplementation "org.assertj:assertj-core:${assertjVersion}"
+
+    // Faker
+    testImplementation "net.datafaker:datafaker:${dataFakerVeersion}"
+
+    // REST Assured
+    testImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
+
+    //Jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2'
 }
 
 test {

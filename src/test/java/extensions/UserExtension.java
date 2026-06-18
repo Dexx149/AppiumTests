@@ -42,14 +42,8 @@ public class UserExtension implements ParameterResolver {
         UserType.Type userType = annotation.value();
 
         return switch (userType) {
-            case VALID -> new UserData(
-                    "login2",
-                    "password2"
-            );
-            case INVALID -> new UserData(
-                    faker.name().username(),
-                    faker.internet().password(8, 16)
-            );
+            case VALID -> UserData.validUser();
+            case INVALID -> UserData.invalidUser();
         };
     }
 }

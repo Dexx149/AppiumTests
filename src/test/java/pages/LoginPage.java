@@ -1,5 +1,7 @@
 package pages;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
@@ -23,7 +25,6 @@ public class LoginPage extends BasePage<LoginPage> {
     }
 
     @Step("Fill login page with credentials: username: '{0}', password: {1}")
-    @Nonnull
     public LoginPage fillLoginPage(String login, String password) {
         setUsername(login);
         setPassword(password);
@@ -31,21 +32,18 @@ public class LoginPage extends BasePage<LoginPage> {
     }
 
     @Step("Set username: '{0}'")
-    @Nonnull
     public LoginPage setUsername(String username) {
         $(loginField).sendKeys(username);
         return this;
     }
 
     @Step("Set password: '{0}'")
-    @Nonnull
     public LoginPage setPassword(String password) {
         $(passwordField).sendKeys(password);
         return this;
     }
 
     @Step("Submit login")
-    @Nonnull
     public <T extends BasePage<?>> T submit(Class<T> pageClass) {
         $(signinButton).click();
         try {
@@ -54,10 +52,11 @@ public class LoginPage extends BasePage<LoginPage> {
             throw new RuntimeException("Не удалось создать страницу " + pageClass.getSimpleName(), e);
         }
     }
-    @Step("Check error on page: {error}")
-    @Nonnull
-    public boolean isErrorDisplayed() {
-        return isElementPresent(errorMsg);
+    @Step("Check error on page")
+    public LoginPage chechThatErrorDisplayed() {
+        assertThat(isElementPresent(errorMsg))
+                .isTrue();
+        return this;
     }
 
 }

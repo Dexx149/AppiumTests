@@ -2,24 +2,23 @@ package tests;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import driver.EmulatorDriver;
+import extensions.AppiumExtension;
 import io.appium.java_client.android.AndroidDriver;
 import pages.LoginPage;
 
+@ExtendWith(AppiumExtension.class)
 public abstract class BaseTest {
 
     private static AndroidDriver driver;
 
-    @BeforeEach
-    public void setUp() {
-        driver = EmulatorDriver.createAndroidDriver();
+    protected AndroidDriver driver() {
+        return (AndroidDriver) AppiumExtension.getDriver();
     }
+
     protected LoginPage getLoginPage() {
-        return new LoginPage(driver);
-    }
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
+        return new LoginPage(driver());
     }
 }

@@ -8,6 +8,7 @@ import driver.EmulatorDriver;
 import extensions.AppiumExtension;
 import io.appium.java_client.android.AndroidDriver;
 import pages.LoginPage;
+import pages.MainPage;
 
 @ExtendWith(AppiumExtension.class)
 public abstract class BaseTest {
@@ -21,4 +22,5 @@ public abstract class BaseTest {
     protected LoginPage getLoginPage() {
         return new LoginPage(driver());
     }
+
 }

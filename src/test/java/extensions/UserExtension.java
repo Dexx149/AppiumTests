@@ -25,7 +25,6 @@ public class UserExtension implements ParameterResolver {
         }
 
     }
-    private static final Faker faker = new Faker();
 
     @Override
     public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext)

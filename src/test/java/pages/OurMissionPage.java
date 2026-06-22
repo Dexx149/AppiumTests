@@ -8,15 +8,15 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 
-public class NewsPage extends BaseLoggedPage {
+public class OurMissionPage extends BaseLoggedPage{
 
-    private final By header = AppiumBy.id("ru.iteco.fmhandroid:id/container_custom_app_bar_include_on_fragment_news_list");
-    public NewsPage(AppiumDriver driver) {
+    private final By header = AppiumBy.id("ru.iteco.fmhandroid:id/our_mission_title_text_view");
+    public OurMissionPage(AppiumDriver driver) {
         super(driver);
     }
 
-    @Step("Check that News page is loaded")
-    public NewsPage checkThatPageLoaded() {
+    @Step("Check that OurMission page is loaded")
+    public OurMissionPage checkThatPageLoaded() {
         assertThat(isElementDisplayed(header))
                 .isTrue();
         return this;

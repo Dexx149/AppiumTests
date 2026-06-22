@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 
 public abstract class BasePage<T extends BasePage<?>> {
@@ -31,6 +32,7 @@ public abstract class BasePage<T extends BasePage<?>> {
             return false;
         }
     }
+
     protected boolean isElementPresent(By by) {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(by));

@@ -52,8 +52,9 @@ public class LoginPage extends BasePage<LoginPage> {
             throw new RuntimeException("Не удалось создать страницу " + pageClass.getSimpleName(), e);
         }
     }
+
     @Step("Check error on page")
-    public LoginPage chechThatErrorDisplayed() {
+    public LoginPage checkThatErrorDisplayed() {
         assertThat(isElementPresent(errorMsg))
                 .isTrue();
         return this;

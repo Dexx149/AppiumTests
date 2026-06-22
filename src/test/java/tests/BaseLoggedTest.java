@@ -12,15 +12,17 @@ import models.UserData;
 import pages.MainPage;
 
 @ExtendWith(UserExtension.class)
-public abstract class BaseLoggedTest extends BaseTest{
+public abstract class BaseLoggedTest extends BaseTest {
 
     @BeforeEach
     public void login(@UserExtension.UserType(UserExtension.UserType.Type.VALID) UserData user) {
-        getLoginPage().fillLoginPage(user.login(),user.password())
-                .submit(MainPage.class); ;
+        getLoginPage().fillLoginPage(user.login(), user.password())
+                .submit(MainPage.class);
+        ;
     }
 
     protected MainPage openMainPage() {
         return new MainPage((AndroidDriver) AppiumExtension.getDriver());
     }
+
 }

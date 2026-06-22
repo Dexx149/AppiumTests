@@ -13,8 +13,6 @@ import pages.MainPage;
 @ExtendWith(AppiumExtension.class)
 public abstract class BaseTest {
 
-    private static AndroidDriver driver;
-
     protected AndroidDriver driver() {
         return (AndroidDriver) AppiumExtension.getDriver();
     }

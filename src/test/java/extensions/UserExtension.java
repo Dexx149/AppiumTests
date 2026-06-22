@@ -20,6 +20,7 @@ public class UserExtension implements ParameterResolver {
     @Retention(RetentionPolicy.RUNTIME)
     public @interface UserType {
         Type value() default Type.VALID;
+
         enum Type {
             VALID, INVALID
         }

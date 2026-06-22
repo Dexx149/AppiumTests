@@ -14,7 +14,7 @@ public class LoginTest extends BaseTest {
     @Test
     @User
     public void shouldLoginWithValidCredentials(@UserType(Type.VALID) UserData user) {
-        getLoginPage().fillLoginPage(user.login(),user.password())
+        getLoginPage().fillLoginPage(user.login(), user.password())
                 .submit(MainPage.class)
                 .checkThatPageLoaded();
     }
@@ -23,9 +23,9 @@ public class LoginTest extends BaseTest {
     @Test
     @User
     public void shouldShowErrMsgWithInvalidCredentials(@UserType(Type.INVALID) UserData user) {
-        getLoginPage().fillLoginPage(user.login(),user.password())
+        getLoginPage().fillLoginPage(user.login(), user.password())
                 .submit(LoginPage.class)
-                .chechThatErrorDisplayed();
+                .checkThatErrorDisplayed();
     }
 
 

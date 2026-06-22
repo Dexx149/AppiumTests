@@ -2,13 +2,15 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 
-public class AboutPageTest extends BaseLoggedTest {
+import pages.BaseLoggedPage;
+
+public class NewsTest extends BaseLoggedTest {
 
     @Test
-    public void shouldDisplayAboutPage() {
+    public void shouldDisplayNewsPage() {
         openMainPage()
                 .openMainMenu()
-                .goToAboutPage()
+                .goToNewsPage()
                 .checkThatPageLoaded();
     }
 }

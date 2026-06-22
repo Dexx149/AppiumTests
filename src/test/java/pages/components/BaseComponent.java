@@ -24,10 +24,9 @@ public abstract class BaseComponent<T extends BaseComponent<?>> {
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
-    // ✅ Базовые действия
     public T click() {
         getSelf().click();
-        return (T)this;
+        return (T) this;
     }
 
     public boolean isDisplayed() {

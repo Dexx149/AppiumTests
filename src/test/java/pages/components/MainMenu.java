@@ -19,17 +19,17 @@ public class MainMenu extends BaseComponent<MainMenu> {
         super(driver, AppiumBy.id("ru.iteco.fmhandroid:id/main_menu_image_button"));
     }
 
-    public MainPage goToMainPage() {
+    public MainPage openMainPage() {
         driver.findElement(mainPageLocator).click();
         return new MainPage(driver);
     }
 
-    public AboutPage goToAboutPage() {
+    public AboutPage openAboutPage() {
         driver.findElement(aboutPageLocator).click();
         return new AboutPage(driver);
     }
 
-    public NewsPage goToNewsPage() {
+    public NewsPage openNewsPage() {
         driver.findElement(newsPageLocator).click();
         return new NewsPage(driver);
     }

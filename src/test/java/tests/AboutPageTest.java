@@ -8,7 +8,7 @@ public class AboutPageTest extends BaseLoggedTest {
     public void shouldDisplayAboutPage() {
         openMainPage()
                 .openMainMenu()
-                .goToAboutPage()
+                .openAboutPage()
                 .checkThatPageLoaded();
     }
 }

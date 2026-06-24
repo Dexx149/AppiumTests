@@ -9,4 +9,16 @@ public class MainPageTest extends BaseLoggedTest{
         openMainPage()
                 .checkThatPageLoaded();
     }
+
+
+    @Test
+    public void toggleNewsListButtonTest() {
+        openMainPage()
+                .checkThatNewsListIsDisplayed()
+                .toggleButtonClick()
+                .checkThatNewsListIsNotDisplayed()
+                .toggleButtonClick()
+                .checkThatNewsListIsDisplayed();
+
+    }
 }

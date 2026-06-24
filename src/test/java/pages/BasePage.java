@@ -21,10 +21,6 @@ public abstract class BasePage<T extends BasePage<?>> {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
-    protected WebElement clickable(By by) {
-        return wait.until(ExpectedConditions.elementToBeClickable(by));
-    }
-
     protected boolean isElementDisplayed(By by) {
         try {
             return $(by).isDisplayed();

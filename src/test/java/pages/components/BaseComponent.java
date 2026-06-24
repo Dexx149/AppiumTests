@@ -17,13 +17,15 @@ public abstract class BaseComponent<T extends BaseComponent<?>> {
     protected BaseComponent(AppiumDriver driver, By locator) {
         this.driver = driver;
         this.locator = locator;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
     protected WebElement getSelf() {
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
-
+    public By getLocator() {
+        return locator;
+    }
     public T click() {
         getSelf().click();
         return (T) this;

@@ -9,6 +9,6 @@ public class NewsPageTest extends BaseLoggedTest {
         openMainPage()
                 .openMainMenu()
                 .openNewsPage()
-                .checkThatPageLoaded();
+                .checkThatNewsPageLoaded();
     }
 }

@@ -1,13 +1,11 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
-import pages.components.MainMenu;
 import pages.components.MainNewsListComponent;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,13 +16,14 @@ public class MainPage extends BaseLoggedPage {
     private final MainNewsListComponent mainNewsListComponent;
     private final By toggleNewsListButton = AppiumBy.id("ru.iteco.fmhandroid:id/expand_material_button");
 
+
     public MainPage(AppiumDriver driver) {
         super(driver);
         mainNewsListComponent = new MainNewsListComponent(driver);
     }
 
     @Step("Check that main page is loaded")
-    public MainPage checkThatPageLoaded() {
+    public MainPage checkThatMainPageLoaded() {
         assertThat(isElementDisplayed(header)).isTrue();
         return this;
     }
@@ -45,5 +44,11 @@ public class MainPage extends BaseLoggedPage {
     public MainPage toggleButtonClick() {
         $(toggleNewsListButton).click();
         return this;
+    }
+
+    @Step("Open NewsPage with All News button")
+    public NewsPage allNewsButtonClick() {
+        mainNewsListComponent.allNewsButtonClick();
+        return new NewsPage(driver);
     }
 }

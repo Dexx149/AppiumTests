@@ -17,7 +17,7 @@ public class AboutPage extends BaseLoggedPage {
     }
 
     @Step("Check that about page is loaded")
-    public AboutPage checkThatPageLoaded() {
+    public AboutPage checkThatAboutPageLoaded() {
         assertThat(isElementDisplayed(header))
                 .isTrue();
         return this;

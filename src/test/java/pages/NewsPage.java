@@ -17,7 +17,7 @@ public class NewsPage extends BaseLoggedPage {
     }
 
     @Step("Check that News page is loaded")
-    public NewsPage checkThatPageLoaded() {
+    public NewsPage checkThatNewsPageLoaded() {
         assertThat(isElementDisplayed(header))
                 .isTrue();
         return this;

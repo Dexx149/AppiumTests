@@ -9,6 +9,6 @@ public class AboutPageTest extends BaseLoggedTest {
         openMainPage()
                 .openMainMenu()
                 .openAboutPage()
-                .checkThatPageLoaded();
+                .checkThatAboutPageLoaded();
     }
 }

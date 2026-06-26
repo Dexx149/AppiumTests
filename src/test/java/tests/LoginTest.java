@@ -16,7 +16,7 @@ public class LoginTest extends BaseTest {
     public void shouldLoginWithValidCredentials(@UserType(Type.VALID) UserData user) {
         getLoginPage().fillLoginPage(user.login(), user.password())
                 .submit(MainPage.class)
-                .checkThatPageLoaded();
+                .checkThatMainPageLoaded();
     }
 
 

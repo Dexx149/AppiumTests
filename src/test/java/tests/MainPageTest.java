@@ -7,12 +7,12 @@ public class MainPageTest extends BaseLoggedTest{
     @Test
     public void shouldDisplayMainPage() {
         openMainPage()
-                .checkThatPageLoaded();
+                .checkThatMainPageLoaded();
     }
 
 
     @Test
-    public void toggleNewsListButtonTest() {
+    public void shouldExpandAndCollapseNewsListOnButtonClick() {
         openMainPage()
                 .checkThatNewsListIsDisplayed()
                 .toggleButtonClick()
@@ -20,5 +20,12 @@ public class MainPageTest extends BaseLoggedTest{
                 .toggleButtonClick()
                 .checkThatNewsListIsDisplayed();
 
+    }
+
+    @Test
+    public void shouldOpenNewsPage() {
+        openMainPage()
+                .allNewsButtonClick()
+                .checkThatNewsPageLoaded();
     }
 }

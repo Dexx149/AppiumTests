@@ -5,10 +5,21 @@ import org.junit.jupiter.api.Test;
 public class OurMissionTest extends BaseLoggedTest {
 
     @Test
-    public void shouldDisplayOurMissionPage() {
+    public void shouldDisplayOurMissionPageWithQuotes() {
         openMainPage()
                 .ourMissionClick()
-                .checkThatPageLoaded();
+                .checkThatOurMissionPageLoaded()
+                .checkThatQuotesListIsDisplayed();
     }
 
+    @Test
+    public void shouldExpandAndCollapseQuoteTextOnClick() {
+        openMainPage()
+                .ourMissionClick()
+                .checkThatFirstQuoteTextIsNotDisplayed()
+                .firstQuoteClick()
+                .checkThatFirstQuoteTextIsDisplayed()
+                .firstQuoteClick()
+                .checkThatFirstQuoteTextIsNotDisplayed();
+    }
 }

@@ -15,8 +15,8 @@ public class MainNewsListComponent extends BaseComponent<MainNewsListComponent> 
 
 
     private static final By newsListLocator = AppiumBy.id("ru.iteco.fmhandroid:id/container_list_news_include_on_fragment_main");
-    private static final By newsItemLocator = AppiumBy.id("ru.iteco.fmhandroid:id/container_list_news_include_on_fragment_main");
-
+    // нет возможности найти локатор, тк новости не отображаются
+    //private static final By newsItemLocator = AppiumBy.id("");
     private final By allNewsButton = AppiumBy.id("ru.iteco.fmhandroid:id/all_news_text_view");
 
     public MainNewsListComponent(AppiumDriver driver) {
@@ -38,20 +38,20 @@ public class MainNewsListComponent extends BaseComponent<MainNewsListComponent> 
         wait.until(ExpectedConditions.elementToBeClickable(allNewsButton)).click();
     }
 
-    public List<NewsItem> getNewsItems() {
-        List<WebElement> webElements = driver.findElements(newsItemLocator);
+//    public List<NewsItem> getNewsItems() {
+//        List<WebElement> webElements = driver.findElements(newsItemLocator);
+//
+//        return webElements.stream()
+//                .map(element -> new NewsItem(driver, element))
+//                .collect(Collectors.toList());
+//    }
 
-        return webElements.stream()
-                .map(element -> new NewsItem(driver, element))
-                .collect(Collectors.toList());
-    }
-
-    public int getNewsCount() {
-        return getNewsItems().size();
-    }
-
-    public NewsItem getFirstNews() {
-        return getNewsItems().getFirst();
-    }
+//    public int getVisibleNewsCount() {
+//        return getNewsItems().size();
+//    }
+//
+//    public NewsItem getFirstNews() {
+//        return getNewsItems().getFirst();
+//    }
 
 }

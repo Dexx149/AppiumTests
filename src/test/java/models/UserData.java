@@ -1,6 +1,6 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonProperty; // ← ПРАВИЛЬНЫЙ импорт!
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record UserData(
         @JsonProperty("login") String login,
@@ -13,5 +13,6 @@ public record UserData(
     public static UserData invalidUser() {
         return new UserData("wrong_login", "wrong_pass");
     }
+
 }
 

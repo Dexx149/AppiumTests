@@ -39,13 +39,16 @@ public class OurMissionPage extends BaseLoggedPage{
     }
     @Step("Check That Quote Text Is Displayed After Toggle")
     public OurMissionPage checkThatFirstQuoteTextIsDisplayed() {
+        wait.until(driver -> !quotesListComponent.getQuotesItems().isEmpty());
         assertThat(quotesListComponent.getQuotesItems().getFirst().isQuoteTextDisplayed()).isTrue();
         return this;
     }
 
     @Step("Check That Quote Text Is Not Displayed After Toggle")
     public OurMissionPage checkThatFirstQuoteTextIsNotDisplayed() {
+        wait.until(driver -> !quotesListComponent.getQuotesItems().isEmpty());
         assertThat(quotesListComponent.getQuotesItems().getFirst().isQuoteTextDisplayed()).isFalse();
         return this;
     }
+
 }

@@ -1,4 +1,4 @@
-package tests;
+package tests.e2e;
 
 import annotations.User;
 import extensions.UserExtension.UserType;

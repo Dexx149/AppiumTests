@@ -4,6 +4,7 @@ package pages.components;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import pages.AboutPage;
 import pages.MainPage;
@@ -20,17 +21,17 @@ public class MainMenu extends BaseComponent<MainMenu> {
     }
 
     public MainPage openMainPage() {
-        driver.findElement(mainPageLocator).click();
+        wait.until(ExpectedConditions.elementToBeClickable(mainPageLocator)).click();
         return new MainPage(driver);
     }
 
     public AboutPage openAboutPage() {
-        driver.findElement(aboutPageLocator).click();
+        wait.until(ExpectedConditions.elementToBeClickable(aboutPageLocator)).click();
         return new AboutPage(driver);
     }
 
     public NewsPage openNewsPage() {
-        driver.findElement(newsPageLocator).click();
+        wait.until(ExpectedConditions.elementToBeClickable(newsPageLocator)).click();
         return new NewsPage(driver);
     }
 }

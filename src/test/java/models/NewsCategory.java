@@ -1,5 +1,7 @@
 package models;
 
+import net.datafaker.Faker;
+
 import java.util.Arrays;
 
 public enum NewsCategory {
@@ -42,5 +44,12 @@ public enum NewsCategory {
                 .filter(category -> category.displayName.equalsIgnoreCase(displayName))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Неизвестная категория: " + displayName));
+    }
+
+    public static String getRandomCategoryName(){
+        Faker faker = new Faker();
+        int categoryId = faker.number().numberBetween(0, NewsCategory.values().length);
+        String categoryName = NewsCategory.fromId(categoryId).getDisplayName();
+        return categoryName;
     }
 }

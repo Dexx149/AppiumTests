@@ -1,9 +1,14 @@
 package pages.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,6 +16,7 @@ import java.util.stream.Collectors;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
+import models.News;
 
 public class ControlPanelNewsListComponent extends BaseComponent<ControlPanelNewsListComponent> {
 
@@ -31,44 +37,76 @@ public class ControlPanelNewsListComponent extends BaseComponent<ControlPanelNew
     }
 
     public List<NewsControlPanelItem> getVisibleNewsItems() {
-        List<WebElement> webElements = wait.until(
-                ExpectedConditions.visibilityOfAllElementsLocatedBy(newsItemLocator)
-        );
+        try {
+            List<WebElement> webElements = wait.until(
+                    ExpectedConditions.visibilityOfAllElementsLocatedBy(newsItemLocator)
+            );
 
-        return webElements.stream()
-                .filter(this::hasVisibleTitle)
-                .map(element -> new NewsControlPanelItem(driver, element))
-                .collect(Collectors.toList());
+            return webElements.stream()
+                    .filter(this::hasVisibleTitle)
+                    .map(element -> new NewsControlPanelItem(driver, element))
+                    .collect(Collectors.toList());
+        } catch (TimeoutException e) {
+            return Collections.emptyList();
+        }
     }
 
-    public NewsControlPanelItem getFirstNews() {
-        List<NewsControlPanelItem> visibleItems = getVisibleNewsItems();
-        return visibleItems.getFirst();
-    }
-
-
-    public NewsControlPanelItem getLastNews() {
+    public List<NewsControlPanelItem> getAllNewsItems() {
+        List<NewsControlPanelItem> allItems = new ArrayList<>();
         Set<String> seenTitles = new HashSet<>();
-        NewsControlPanelItem lastItem = null;
         int maxScrolls = 10;
 
         for (int i = 0; i < maxScrolls; i++) {
             List<NewsControlPanelItem> visibleItems = getVisibleNewsItems();
-            lastItem = visibleItems.getLast();
-            String lastTitle = lastItem.getTitle();
 
+            if (visibleItems.isEmpty()) {
+                break;
+            }
+
+            String lastTitle = visibleItems.getLast().title();
             if (seenTitles.contains(lastTitle)) {
-                return lastItem;
+                break;
             }
 
             for (NewsControlPanelItem item : visibleItems) {
-                seenTitles.add(item.getTitle());
+                String title = item.title();
+                if (!seenTitles.contains(title)) {
+                    seenTitles.add(title);
+                    allItems.add(item);
+                }
             }
+            if (!scrollDown()) {
+                break;
+            }
+        }
+        return allItems;
+    }
+
+    private boolean scrollDown() {
+        try {
             driver.findElement(AppiumBy.androidUIAutomator(
                     "new UiScrollable(new UiSelector().scrollable(true)).scrollForward()"
             ));
+            return true;
+        } catch (Exception e) {
+            return false;
         }
-        return lastItem;
+    }
+
+    public NewsControlPanelItem getFirstNews() {
+        List<NewsControlPanelItem> visibleItems = getVisibleNewsItems();
+        if (visibleItems.isEmpty()) {
+            throw new RuntimeException("Список новостей пуст!");
+        }
+        return visibleItems.getFirst();
+    }
+
+    public NewsControlPanelItem getLastNews() {
+        List<NewsControlPanelItem> allItems = getAllNewsItems();
+        if (allItems.isEmpty()) {
+            throw new RuntimeException("Список новостей пуст!");
+        }
+        return allItems.getLast();
     }
 
     // Метод для проверки видимости заголовка новости в карточке

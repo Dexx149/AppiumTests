@@ -24,6 +24,7 @@ public class testtest extends BaseService {
     public void testt(){
         NewsService newsService = new NewsService();
         List<News> newsList = newsService.getNewsVisibleOnControlPanel();
+
     }
 
 }

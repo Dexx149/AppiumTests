@@ -23,7 +23,7 @@ public record News(
         Faker faker = new Faker(new Locale("ru"));
         return new News(
                 0,
-                faker.number().numberBetween(1, 9),
+                faker.number().numberBetween(1, NewsCategory.values().length),
                 faker.lorem().characters(20),
                 faker.lorem().characters(50),
                 0,
@@ -33,16 +33,9 @@ public record News(
                 ""
         );
     }
-    public static News fromUI(String title, String description, long createDate, long publishDate, String creatorName, boolean publishEnabled) {
-        return new News(0, 1, title, description, 0, createDate,
-                publishDate, publishEnabled, creatorName);
-    }
 
     public boolean isPublished() {
         return publishEnabled;
     }
 
-    public NewsCategory getCategory() {
-        return NewsCategory.fromId(newsCategoryId);
-    }
 }

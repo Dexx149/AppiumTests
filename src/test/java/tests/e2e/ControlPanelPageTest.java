@@ -54,4 +54,13 @@ public class ControlPanelPageTest extends BaseLoggedTest{
 
     }
 
+    @Test
+    public void shouldFilterNewsCorrectly() {
+        openMainPage()
+                .openMainMenu()
+                .openNewsPage()
+                .openControlPanel()
+                .applyRandomFilterAndVerify();
+    }
+
 }

@@ -44,4 +44,16 @@ public class NewsService extends BaseService{
         return putRequest(BASE_PATH, payload);
     }
 
+    public List<News> filterByCategory(List<News> news, int categoryId) {
+        return news.stream()
+                .filter(n -> n.newsCategoryId() == categoryId)
+                .toList();
+    }
+
+    public List<News> filterByPublishStatus(List<News> news, boolean published) {
+        return news.stream()
+                .filter(n -> n.publishEnabled() == published)
+                .toList();
+    }
+
 }

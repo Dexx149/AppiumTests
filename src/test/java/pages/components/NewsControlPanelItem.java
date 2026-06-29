@@ -17,7 +17,7 @@ import models.News;
 public class NewsControlPanelItem {
 
     private final News news;
-    private final WebElement rootElement;
+    private WebElement rootElement;
     private final AppiumDriver driver;
     protected final WebDriverWait wait;
 

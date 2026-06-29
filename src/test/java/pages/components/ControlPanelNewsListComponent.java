@@ -36,6 +36,7 @@ public class ControlPanelNewsListComponent extends BaseComponent<ControlPanelNew
         }
     }
 
+    // Получить элементы видимые сейчас на экране
     public List<NewsControlPanelItem> getVisibleNewsItems() {
         try {
             List<WebElement> webElements = wait.until(

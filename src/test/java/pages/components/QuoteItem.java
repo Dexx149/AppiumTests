@@ -16,6 +16,7 @@ public class QuoteItem{
 
     private final By titleLocator = By.id("ru.iteco.fmhandroid:id/our_mission_item_title_text_view");
     private final By descriptionLocator = By.id("ru.iteco.fmhandroid:id/our_mission_item_description_text_view");
+
     protected final WebDriverWait wait;
 
 

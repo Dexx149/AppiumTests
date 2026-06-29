@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import io.qameta.allure.Step;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import models.News;
@@ -22,6 +23,7 @@ public class NewsService extends BaseService{
         return getRequest(BASE_PATH);
     }
 
+    @Step("Get news that displayed on control panel")
     public List<News> getNewsVisibleOnControlPanel() {
         var response = getRequest(BASE_PATH + "?pages=1&publishDate=false");
 
@@ -42,18 +44,6 @@ public class NewsService extends BaseService{
 
     public Response updateNews(News payload){
         return putRequest(BASE_PATH, payload);
-    }
-
-    public List<News> filterByCategory(List<News> news, int categoryId) {
-        return news.stream()
-                .filter(n -> n.newsCategoryId() == categoryId)
-                .toList();
-    }
-
-    public List<News> filterByPublishStatus(List<News> news, boolean published) {
-        return news.stream()
-                .filter(n -> n.publishEnabled() == published)
-                .toList();
     }
 
 }

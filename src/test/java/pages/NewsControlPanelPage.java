@@ -11,8 +11,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import groovy.util.logging.Log;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import models.News;
 import models.NewsCategory;
@@ -25,6 +27,7 @@ public class NewsControlPanelPage extends BaseLoggedPage {
     private final By header = AppiumBy.id("ru.iteco.fmhandroid:id/container_custom_app_bar_include_on_fragment_news_control_panel");
     private final By sortButton = AppiumBy.id("ru.iteco.fmhandroid:id/sort_news_material_button");
     private final By filterButton = AppiumBy.id("ru.iteco.fmhandroid:id/filter_news_material_button");
+    private final By addNewsButton = AppiumBy.id("ru.iteco.fmhandroid:id/add_news_image_view");
     private final By confirmDeleteButton = AppiumBy.id("android:id/button1");
     private final By emptyListMessage = AppiumBy.id("ru.iteco.fmhandroid:id/control_panel_empty_news_list_text_view");
 
@@ -89,20 +92,25 @@ public class NewsControlPanelPage extends BaseLoggedPage {
     }
 
     @Step("Delete first news and verify")
-    // добавить сюда шаги в allure
     public NewsControlPanelPage deleteFirstNews() {
         String title = newsListComponent.getFirstNews().title();
+        Allure.step("First news delete button click", () -> {
+            newsListComponent.getFirstNews().clickDeleteButton();
+        });
 
-        newsListComponent.getFirstNews().clickDeleteButton();
-        wait.until(ExpectedConditions.elementToBeClickable(confirmDeleteButton)).click();
+        Allure.step("Confirm delete button click", () -> {
+            wait.until(ExpectedConditions.elementToBeClickable(confirmDeleteButton)).click();
+        });
 
-        List<String> titles = newsListComponent.getVisibleNewsItems().stream()
-                .map(NewsControlPanelItem::title)
-                .collect(Collectors.toList());
+        Allure.step("Check that deleted news is not displayed", () -> {
+            List<String> titles = newsListComponent.getVisibleNewsItems().stream()
+                    .map(NewsControlPanelItem::title)
+                    .collect(Collectors.toList());
 
-        assertThat(titles)
-                .doesNotContain(title);
+            assertThat(titles)
+                    .doesNotContain(title);
 
+        });
         return this;
     }
 
@@ -195,6 +203,29 @@ public class NewsControlPanelPage extends BaseLoggedPage {
                 .comparingOnlyFields("title", "publishEnabled")
                 .ignoringCollectionOrder()
                 .isEqualTo(expectedNews);
+
+        return this;
+    }
+
+    @Step("First News Edit Button Click")
+    public EditNewsPage firstNewsEditButtonClick() {
+        newsListComponent.getFirstNews().clickEditButton();
+        return new EditNewsPage(driver);
+    }
+
+    @Step("Create News Button Click")
+    public EditNewsPage addNewsButtonClick() {
+        wait.until(ExpectedConditions.elementToBeClickable(addNewsButton)).click();
+        return new EditNewsPage(driver);
+    }
+
+    @Step("Verify that news with title '{0}' exists in list")
+    public NewsControlPanelPage verifyNewsExists(String title) {
+        List<NewsControlPanelItem> items = newsListComponent.getAllNewsItems();
+        boolean exists = items.stream().anyMatch(item -> item.title().equals(title));
+
+        assertThat(exists)
+                .isTrue();
 
         return this;
     }

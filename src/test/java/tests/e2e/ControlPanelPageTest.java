@@ -63,4 +63,25 @@ public class ControlPanelPageTest extends BaseLoggedTest{
                 .applyRandomFilterAndVerify();
     }
 
+    @Test
+    public void shouldCreateNews(){
+        openMainPage()
+                .openMainMenu()
+                .openNewsPage()
+                .openControlPanel()
+                .addNewsButtonClick()
+                .saveAndVerifyRandomNews();
+    }
+
+    @Test
+    public void shouldEditFirstNews(){
+        openMainPage()
+                .openMainMenu()
+                .openNewsPage()
+                .openControlPanel()
+                .firstNewsEditButtonClick()
+                .saveAndVerifyRandomNews();
+    }
+
+
 }

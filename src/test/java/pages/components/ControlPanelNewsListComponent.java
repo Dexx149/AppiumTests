@@ -40,13 +40,19 @@ public class ControlPanelNewsListComponent extends BaseComponent<ControlPanelNew
     public List<NewsControlPanelItem> getVisibleNewsItems() {
         try {
             List<WebElement> webElements = wait.until(
-                    ExpectedConditions.visibilityOfAllElementsLocatedBy(newsItemLocator)
+                    ExpectedConditions.presenceOfAllElementsLocatedBy(newsItemLocator)
             );
-
             return webElements.stream()
-                    .filter(this::hasVisibleTitle)
-                    .map(element -> new NewsControlPanelItem(driver, element))
+                    .map(element -> new NewsControlPanelItem(driver,element))
+                    .filter(item -> {
+                        try {
+                            return item.isTitleDisplayed();
+                        } catch (Exception e) {
+                            return false;
+                        }
+                    })
                     .collect(Collectors.toList());
+
         } catch (TimeoutException e) {
             return Collections.emptyList();
         }

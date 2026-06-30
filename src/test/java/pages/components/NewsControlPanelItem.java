@@ -90,6 +90,14 @@ public class NewsControlPanelItem {
         return 0;
     }
 
+    public boolean isTitleDisplayed() {
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(titleLocator));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     public boolean isDescriptionTextDisplayed() {
         try {
